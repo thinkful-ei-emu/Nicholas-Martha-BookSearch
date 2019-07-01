@@ -1,13 +1,14 @@
 import React from 'react';
+import './styles/display-list.css';
 
 function DisplayList(props){
    console.log(props.books)
    const listItem = props.books.map((book, index) => {
-       return <div key={index}>
+       return <div key={index} className="result-container">
            <h2>{book.volumeInfo.title}</h2>
-           <p>Author:{book.volumeInfo.authors}</p>
-           <p>{(book.searchInfo) ? book.searchInfo.textSnippet : 'No Description Found'}</p>
-           <img src={book.volumeInfo.imageLinks.thumbnail} alt='book cover'></img>
+           <a href={book.volumeInfo.previewLink} target='_blank'><img className="result-img" src={book.volumeInfo.imageLinks.thumbnail} alt='book cover'></img></a>
+           <p>Author: {book.volumeInfo.authors}</p>
+           <p className="result-desc">{(book.searchInfo) ? book.searchInfo.textSnippet : 'No Description Found'}</p>     
            <p>{(book.saleInfo.listPrice) ?
                 '$' + book.saleInfo.listPrice.amount : book.saleInfo.saleability.toLowerCase().replace(/_/g, ' ')
            } </p>

@@ -1,10 +1,11 @@
 import React from 'react';
 import PrintType from './printType.js';
 import BookType from './bookType.js';
+import './styles/filter-controls.css';
 
 function FilterBar (props) {
   return ( 
-    <div>
+    <div className="filter-controls">
       <PrintType 
       handleChange={props.handleChange}
       handlePrintTypeForm={props.handlePrintTypeForm}

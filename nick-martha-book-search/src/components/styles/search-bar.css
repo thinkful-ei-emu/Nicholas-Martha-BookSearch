@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+.search-bar {
+    background-color: rgb(143, 143, 143);
+    padding: 1%;
+}
+
+#search {
+    background-color: rgb(238, 238, 168);
+}
+
+.search-button {
+    border: 2px solid rgb(75, 107, 252);
+    border-radius: 5px;
+}
