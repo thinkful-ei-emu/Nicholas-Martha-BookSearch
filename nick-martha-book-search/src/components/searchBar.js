@@ -1,8 +1,8 @@
 import React from 'react'
 
-function SearchBar () {
-  return (
-    <form>
+function SearchBar (props) {
+return (
+    <form onSubmit={props.handleSearchSubmit}>
       <label htmlFor="search">Search: </label>
       <input type="text" id="search" name="search" placeholder="books..." required></input> 
       <button>Search</button>
@@ -10,4 +10,6 @@ function SearchBar () {
   )
 }
 
+
 export default SearchBar
+

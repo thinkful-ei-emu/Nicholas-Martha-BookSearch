@@ -6,7 +6,11 @@ function DisplayList(props){
        return <div key={index}>
            <h2>{book.volumeInfo.title}</h2>
            <p>Author:{book.volumeInfo.authors}</p>
-           <p>{book.volumeInfo.description}</p>
+           <p>{(book.searchInfo) ? book.searchInfo.textSnippet : 'No Description Found'}</p>
+           <img src={book.volumeInfo.imageLinks.thumbnail} alt='book cover'></img>
+           <p>{(book.saleInfo.listPrice) ?
+                '$' + book.saleInfo.listPrice.amount : book.saleInfo.saleability.toLowerCase().replace(/_/g, ' ')
+           } </p>
        </div>
    })
    
