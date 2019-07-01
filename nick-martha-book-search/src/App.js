@@ -11,46 +11,69 @@ class App extends React.Component{
   this.state = {
       books: [],
       searchTerm: '',
-      url: ''
+      printFilter: '',
+      bookFilter: ''
   }
-}
-
-handleSearchTerm = (e) => {
-  this.setState({
-    searchTerm : e.target.value
-  })
 }
 
 handleSearchSubmit = (e) => {
   e.preventDefault();
-  this.setState({
+  this.setState ({
     searchTerm : e.target.search.value
   })
-
-}
-
-componentDidMount(){
-  this.setState({
-    url: `https://www.googleapis.com/books/v1/volumes?q=${this.state.searchTerm}&key=AIzaSyCME-TYD-sAZP-aaKeXV23rd7RqZjRpH78`
-  })
-  console.log(this.state.url)
-  fetch()
-  .then(console.log('fetch works'))
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${e.target.search.value}`;
+  fetch(url)
   .then(res => res.json())
   .then(books => this.setState({
     books: books.items
   }))
 }
 
+handleChange = (e) => {
+  this.setState({
+    printFilter: e.target.value
+  })
+}
 
+handleFilterChange = (e) => {
+  this.setState({
+    bookFilter: e.target.value
+  })
+}
+
+handlePrintTypeForm = (e) => {
+  e.preventDefault();
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${this.state.searchTerm}&printType=${e.target.printType.value}`;
+  fetch(url)
+  .then(res => res.json())
+  .then(books => this.setState({
+    books: books.items
+  }))
+}
+
+handleBookTypeForm = (e) => {
+  e.preventDefault();
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${this.state.searchTerm}&filter=${e.target.bookType.value}`;
+  fetch(url)
+  .then(res => res.json())
+  .then(books => this.setState({
+    books: books.items
+  }))
+}
 
   render() {
     return (
       <div className="App">
         <Header />
-        <SearchBar handleSearchTerm={this.handleSearchTerm} handleSearchSubmit={this.handleSearchSubmit} searchTerm={this.state.searchTerm}/>
-        <FilterBar />
-        {(this.state.searchTerm && <DisplayList books={this.state.books} />)}
+        <SearchBar handleSearchSubmit={this.handleSearchSubmit}/>
+        <FilterBar 
+          handlePrintTypeForm={this.handlePrintTypeForm}
+          handleChange={this.handleChange}
+          printFilter={this.state.printFilter}
+          handleBookTypeForm={this.handleBookTypeForm}
+          handleFilterChange={this.handleFilterChange}
+        />
+        <DisplayList books={this.state.books} />
       </div>
     );
   }

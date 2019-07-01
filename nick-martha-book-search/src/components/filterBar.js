@@ -2,11 +2,16 @@ import React from 'react';
 import PrintType from './printType.js';
 import BookType from './bookType.js';
 
-function FilterBar () {
+function FilterBar (props) {
   return ( 
     <div>
-      <PrintType />
-      <BookType />
+      <PrintType 
+      handleChange={props.handleChange}
+      handlePrintTypeForm={props.handlePrintTypeForm}
+      printFilter={props.printFilter}
+      handleFilterChange={props.handleFilterChange}
+      />
+      <BookType handleBookTypeForm={props.handleBookTypeForm}/>
     </div>
   )
 }
